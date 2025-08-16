@@ -20,7 +20,6 @@ class CustomAppBar extends StatelessWidget {
               CustomSearchIcon(),
             ],
           ),
-          CustomNoteItem(),
         ],
       ),
     );
