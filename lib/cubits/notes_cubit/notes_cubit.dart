@@ -16,4 +16,9 @@ class NotesCubit extends Cubit<NotesState> {
     notes = notesBox.values.toList();
     emit(NotesLoadSuccess(notes!));
   }
+
+  Future<void> delateNote(NoteModel note) async {
+    await note.delete();
+    await fetchAllNotes();
+  }
 }
