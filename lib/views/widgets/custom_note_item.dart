@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/edit_note_view.dart';
+import 'package:notes_app/views/widgets/custom_icon_button_in_note.dart';
 
 class CustomNoteItem extends StatelessWidget {
   const CustomNoteItem({super.key, required this.note});
@@ -45,45 +43,7 @@ class CustomNoteItem extends StatelessWidget {
                   ),
                 ),
               ),
-              trailing: IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (dialogCtx) {
-                      return BlocProvider.value(
-                        value: context.read<NotesCubit>(),
-                        child: AlertDialog(
-                          title: const Text('Delete'),
-                          content: const Text(
-                            'Are you sure you want to delete this note?',
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(dialogCtx),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                context.read<NotesCubit>().delateNote(note);
-                                Navigator.pop(dialogCtx);
-                              },
-                              child: const Text(
-                                'Delete',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(
-                  FontAwesomeIcons.trash,
-                  color: Colors.black,
-                  size: 24,
-                ),
-              ),
+              trailing: CustomIconButtonInNote(note: note),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 24),
